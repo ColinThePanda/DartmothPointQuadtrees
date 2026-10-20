@@ -1,0 +1,13 @@
+.{
+    .name = .Point_Quadtrees,
+    .version = "0.0.1",
+    .dependencies = .{
+        .raylib_zig = .{
+            .url = "git+https://github.com/raylib-zig/raylib-zig#bd161c82d4cc42d9ea7986d0c6a86daaae79e430",
+            .hash = "raylib_zig-6.0.0-KE8REMRkBQDX9c7yaFVIEhy7tXWq7fUGyiPd-RdOjrWI",
+        },
+    },
+    .minimum_zig_version = "0.16.0",
+    .paths = .{"src/main.zig"},
+    .fingerprint = 0xa021177556459cd5,
+}
