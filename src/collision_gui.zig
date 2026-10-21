@@ -109,15 +109,20 @@ pub fn main(init: std.process.Init) !void {
             ball.update(rl.getFrameTime(), screen_width, screen_height);
             try tree.split(init.gpa, tr.Point2D.fromRaylib(ball.pos));
         }
-        for (balls.items, 0..) |*ball, i| {
+        for (balls.items) |*ball| {
             colliding.clearRetainingCapacity();
             try tree.findInCircle(init.gpa, &colliding, tr.Point2D.fromRaylib(ball.pos), @as(i32, @intFromFloat(ball.radius)));
             if (colliding.items.len > 1) { // list always contains self
                 ball.colliding = true;
-                if (mode == .destroy)
-                    _ = balls.swapRemove(i);
             } else {
                 ball.colliding = false;
+            }
+        }
+
+        if (mode == .destroy) {
+            for (balls.items, 0..) |*ball, i| {
+                if (ball.colliding)
+                    _ = balls.swapRemove(i);
             }
         }
 
