@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>Page blocked</title>
+
+    <link rel="stylesheet" href="/assets/css/edu_bootstrap.min.css" as="style">
+    <link rel="stylesheet" href="/assets/css/edu_main_v2.css">
+
+    <script rel="preload" src="/assets/js/edu_lottie.min.js" as="script"></script>
+</head>
+<body>
+    <div class="container-fluid min-vh-100">
+      <div
+        class="row vh-40 text-center d-flex justify-content-center align-items-center"
+      >
+        <div class="col">
+          <p class="website-is-blocked">
+            <span class="blocked-url">www.decisionproblem.com</span> is blocked
+          </p>
+          <p class="blocked-text">
+            This domain has been blocked by your school's internet policy
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <div id="animation"></div>
+          <script>
+
+
+            function randomIntFromInterval(min, max) {
+              
+              return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+            function setCookie(name, value, days) {
+              var expires = "";
+              if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = "; expires=" + date.toUTCString();
+              }
+              document.cookie =
+                name + "=" + (value || "") + expires + "; path=/";
+            }
+            function getCookie(name) {
+              var nameEQ = name + "=";
+              var ca = document.cookie.split(";");
+              for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0)
+                  return c.substring(nameEQ.length, c.length);
+              }
+              return null;
+            }
+            function eraseCookie(name) {
+              document.cookie =
+                name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+            }
+
+            var x = getCookie("rotating_animation_number");
+            if (x) {
+              setCookie("rotating_animation_number", (x % 2) + 1, 7);
+            } else {
+              setCookie("rotating_animation_number", 1, 7);
+              x = 1;
+            }
+
+            lottie.loadAnimation({
+              container: animation,
+              path: "/assets/edu_animation/" + x + ".json",
+              renderer: "svg",
+              loop: true,
+              autoplay: true
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -120,9 +120,13 @@ pub fn main(init: std.process.Init) !void {
         }
 
         if (mode == .destroy) {
-            for (balls.items, 0..) |*ball, i| {
-                if (ball.colliding)
+            var i: usize = 0;
+            while (i < balls.items.len) {
+                if (balls.items[i].colliding) {
                     _ = balls.swapRemove(i);
+                } else {
+                    i += 1;
+                }
             }
         }
 
@@ -131,7 +135,8 @@ pub fn main(init: std.process.Init) !void {
 
         rl.clearBackground(.light_gray);
 
-        tr.drawTreeRecursiveNoBalls(tree);
+        if (balls.items.len > 0)
+            tr.drawTreeRecursiveNoBalls(tree);
 
         for (balls.items) |ball| {
             const color: rl.Color = if (ball.colliding and mode == .color) .red else .black;
